@@ -85,7 +85,7 @@ This project is a Python-based trading bot built for the [**Coinex Perpetual Fut
 
 ##  Default Strategy
 
-The bot's default strategy is a trend following implementation at its core and utilizes widely used technical indicators, computed via taapi.io API, and executed against live Coinex orderbooks.
+Although there are diffrent ready-to-use indicators in the source code, the bot's default strategy is a trend following implementation and utilizes widely used technical indicators, computed via taapi.io API, and executed against live Coinex orderbooks.
 
 ###  Indicator Logic Example:
 
