@@ -124,8 +124,8 @@ This process is repeated for each indicator (SAR, ADX, etc.) and their combined 
 #### The strategy relys on clear short/medium term price swings in either direction. It's trend following in nature and produces well-balanced returns in trending markets.
 Here are what valid long and short signals might look like:
 
-![Buy signal](https://github.com/motaghi-dev/Coinex-Trading-Bot/blob/main/src/BuySignal.png)
-<img src="[drawing.jpg](https://github.com/motaghi-dev/Coinex-Trading-Bot/blob/main/src/BuySignal.png)" alt="Buy signal" width="200"/>
+![Buy signal](https://github.com/motaghi-dev/Coinex-Trading-Bot/blob/main/src/BuySignal.png = 350x450)
+
 
 ---
 
