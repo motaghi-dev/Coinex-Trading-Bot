@@ -125,6 +125,7 @@ This process is repeated for each indicator (SAR, ADX, etc.) and their combined 
 Here are what valid long and short signals might look like:
 
 ![Buy signal](https://github.com/motaghi-dev/Coinex-Trading-Bot/blob/main/src/BuySignal.png = 350x450)
+<img src="[http://....jpg](https://github.com/motaghi-dev/Coinex-Trading-Bot/blob/main/src/BuySignal.png)" width="350" height="450" /
 
 
 ---
@@ -180,14 +181,6 @@ cd coinex-trading-bot
 
 ```bash
 pip install -r requirements.txt
-```
-
-_Example dependencies (include these in your `requirements.txt` file):_
-
-```
-requests
-schedule
-termcolor
 ```
 
 3. **Set your API Credentials**
