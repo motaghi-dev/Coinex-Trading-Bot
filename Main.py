@@ -186,7 +186,7 @@ def get_indicator_data(indicator: str, params: dict) -> dict:
         logging.error(f"Error fetching {indicator} data: {str(e)}")
         return None
 
-def macd_signal() -> int:
+def macd() -> int:
     """Get trading signal from MACD indicator."""
     params = {
         'backtracks': '3',
@@ -194,7 +194,7 @@ def macd_signal() -> int:
         'optInSlowPeriod': indicator_values[1],
         'optInSignalPeriod': indicator_values[2]
     }
-    
+    time.sleep(15.5)
     data = get_indicator_data("macd", params)
     if not data:
         return 0
@@ -212,7 +212,53 @@ def macd_signal() -> int:
         return robot.ORDER_DIRECTION_SELL
     return 0
 
-def supertrend_signal() -> int:
+def sar() -> int:
+    """Get trading signal from Parabolic SAR indicator."""
+    params_1 = {
+        'backtracks': '4',
+        'optInAcceleration': indicator_values[3],
+        'optInMaximum': indicator_values[4]
+    }
+    params_2 = {
+        'backtracks': '4'
+    }
+    time.sleep(15.5)
+    data_1 = get_indicator_data("sar", params_1)
+    if not data:
+        return 0
+    time.sleep(15.5)
+    data_2 = get_indicator_data("candle", params_2)
+    sar = float(json.loads(json.dumps(data_1.json(), indent=4))[1]['value'])
+    price = float(json.loads(json.dumps(params_2.json(), indent=4))[1]['close'])
+
+    print("SAR:", price, sar, "\n")
+    # Sell signal when SAR value is above price
+    if price < sar:
+        return robot.ORDER_DIRECTION_SELL
+    # Buy signal when SAR value is below price
+    elif price > sar:
+        return robot.ORDER_DIRECTION_BUY
+    return 0
+
+def adx() -> int:
+    """Get trading permission signal from ADX indicator."""
+    params = {
+        'backtracks': '3',
+        'optInTimePeriod': indicator_values[5]
+    }
+    time.sleep(15.5)
+    data = get_indicator_data("adx", params)
+    adx_value = float(json.loads(json.dumps(data.json(), indent=4))[1]['value'])
+
+    print("ADX:", adx_value, "\n")
+    # Permit trade if the trend is strong enough.
+    if adx_value > indicator_values[6]:
+        return 1
+    # Block trade if the trend is weak enough/market is in range.
+    else:
+        return 0
+# Extra ready to use indicators:
+def supertrend() -> int:
     """Get trading signal from Supertrend indicator."""
     params = {
         'backtracks': '3',
@@ -234,7 +280,7 @@ def supertrend_signal() -> int:
         return 1
     return 0
 
-def rsi_signal() -> int:
+def rsi() -> int:
     """Get trading signal from RSI indicator."""
     params = {
         'backtracks': '3',
@@ -261,14 +307,15 @@ def signal_helper():
         risk_free()  # Manage risk for open positions
         
         # Get signals from indicators
-        macd_signal1 = supertrend_signal()
-        rsi_signal1 = rsi_signal()
+        macd_signal = macd()
+        sar_signal = sar()
+        adx_signal = adx()
         
         # Execute trades based on combined signals
-        if macd_signal1 == robot.ORDER_DIRECTION_BUY and rsi_signal1 == 1:
+        if macd_signal == robot.ORDER_DIRECTION_BUY and sar_signal == robot.ORDER_DIRECTION_BUY and adx_signal:
             market_buy(market)
             log_status("BUY", 'green')
-        elif macd_signal1 == robot.ORDER_DIRECTION_SELL and rsi_signal1 == 1:
+        elif macd_signal == robot.ORDER_DIRECTION_SELL and sar_signal == robot.ORDER_DIRECTION_SELL and adx_signal:
             market_sell(market)
             log_status("SELL", 'red')
         else:
