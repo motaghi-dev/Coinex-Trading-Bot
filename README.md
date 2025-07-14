@@ -1,5 +1,5 @@
 
-# 📈 Coinex Perpetual Futures Trading Bot
+#  Coinex Perpetual Futures Trading Bot
 
 
 ![Python](https://img.shields.io/badge/python-3.7+-blue.svg)
@@ -66,8 +66,7 @@ This project is a Python-based trading bot built for the [**Coinex Perpetual Fut
 .
 ├── Main.py               # Core trading bot logic
 ├── api.py                # Coinex API wrapper (provided by Coinex)
-├── request_client.py     # HTTP client with signing and authorization (provided by Coinex)
-└── README.md             # Project description and documentation
+└── request_client.py     # HTTP client with signing and authorization (provided by Coinex) 
 ```
 
 ---
@@ -122,26 +121,37 @@ This process is repeated for each indicator (SAR, ADX, etc.) and their combined 
   -  ##### A trend strength indicator
 
 #### The strategy relys on clear short/medium term price swings in either direction. It's trend following in nature and produces well-balanced returns in trending markets.
+
 Here are what valid long and short signals might look like:
 
-![Buy signal](https://github.com/motaghi-dev/Coinex-Trading-Bot/blob/main/src/BuySignal.png = 350x450)
-<img src="https://github.com/motaghi-dev/Coinex-Trading-Bot/blob/main/src/BuySignal.png" width="350" height="450" /
+Buy signal:
 
+
+<img src="https://github.com/motaghi-dev/Coinex-Trading-Bot/blob/main/src/BuySignal.png" width="350" height="450" />
+
+Sell signal:
+
+<img src="https://github.com/motaghi-dev/Coinex-Trading-Bot/blob/main/src/SellSignal.png" width="350" height="450" />
+
+###### The bot will execute a trade only if there is enough volatility (ADX > 20.1)
+
+The core of the signal is given when MACD histogram's numerical sign shifts. The ADX and Parabolic SAR are used mainly to filter through signals and keep the bot out of unfavorable trades.
+In this context, since MACD is a trend following momentum indicator, it would perform badly in weak/ranging periods. Therefore, ADX and SAR subsequently acting as proxies for volatility and trend strength, would, idealy, keep the bot from imploding.
 
 ---
 
-## 🛡️ Risk Management
+##  Risk Management
 
-Cryptocurrency markets are inherently volatile and unpredictable. To address this, the bot implements:
+Cryptocurrency markets are inherently **volatile** and **unpredictable**. To address this, the bot implements:
 
 - **Fixed Percentage Stop-Losses**: Every trade automatically sets a stop-loss at a pre-defined percentage level.
 - **Risk-Free Trade Management**: If a trade moves in favor, the stop-loss is adjusted to the entry price to secure profits and prevent loss.
 - **Position Sizing**: Each trade uses only **3% of the account's available balance** to manage exposure.
-- **Dynamic leverage management** as per user-defined configurations.
+- **Dynamic leverage management** as per user-defined configurations.(More than 3 is not recommended.)
 
 ---
 
-## 🔧 Configuration & Customization
+##  Configuration & Customization
 
 The bot can be configured interactively at runtime or use default preset values.
 
@@ -168,7 +178,7 @@ At startup, the bot prompts the user to either use default settings or input cus
 
 ---
 
-## 🛠️ Setup & Installation
+##  Setup & Installation
 
 1. **Clone this repository**
 
@@ -195,7 +205,7 @@ INDICATOR_API_KEY = 'YOUR_TAAPI_API_KEY'
 
 ---
 
-## 🚀 Running the Bot
+##  Running the Bot
 
 Simply run:
 
@@ -207,35 +217,23 @@ The bot will prompt for configuration and then start trading based on the define
 
 ---
 
-## 📈 Future Development
+##  Future Development
 
 Planned enhancements:
 
-- Portfolio-level risk management tools
+- More rigorous risk management tools
 - Expanded strategy framework (including correlation-based, sentiment, and intermarket analysis)
-- Trade history logging and performance reporting
-- Telegram/Discord notifications
-- Docker deployment support
-- Multi-exchange support via modular API wrappers
+- Trade history logging and performance reporting.
+- 
+---
+
+###  Disclaimer
+
+ 
+> Trading cryptocurrencies involves a **very high level of risk**. This bot is designed for educational purposes. You are solely responsible for your financial decisions. Use this this content at your own discretion.
 
 ---
 
-## 📜 Disclaimer
+##  License
 
-> **⚠️ Warning:**  
-> Trading cryptocurrencies involves a **high level of risk**. This bot is designed for educational and personal use purposes. You are solely responsible for your trades and financial decisions. Use this software at your own risk.
-
----
-
-## 📬 Contact
-
-If you have questions, ideas, or would like to collaborate:
-
-- 📧 Email: your_email@example.com
-- 📱 Telegram: [@yourhandle](https://t.me/yourhandle)
-
----
-
-## ⭐️ Show your support
-
-If you find this project helpful, feel free to star the repository ⭐️ and share it!
+This project is open-source and available under the [MIT License](LICENSE).
