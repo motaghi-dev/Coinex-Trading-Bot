@@ -224,7 +224,6 @@ Planned enhancements:
 - More rigorous risk management tools
 - Expanded strategy framework (including correlation-based, sentiment, and intermarket analysis)
 - Trade history logging and performance reporting.
-- 
 ---
 
 ###  Disclaimer
