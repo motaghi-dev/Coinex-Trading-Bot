@@ -125,7 +125,7 @@ This process is repeated for each indicator (SAR, ADX, etc.) and their combined 
 Here are what valid long and short signals might look like:
 
 ![Buy signal](https://github.com/motaghi-dev/Coinex-Trading-Bot/blob/main/src/BuySignal.png)
-
+<img src="[drawing.jpg](https://github.com/motaghi-dev/Coinex-Trading-Bot/blob/main/src/BuySignal.png)" alt="Buy signal" width="200"/>
 
 ---
 
