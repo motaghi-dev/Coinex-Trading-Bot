@@ -116,7 +116,7 @@ def risk_free():
             robot.put_stop_market_order(market, 2, amount, stop_price, 3)
 
 def market_sell(market: str):
-    """Execute market sell order with 10% of account balance and set stoploss."""
+    """Execute market sell order with 3% of account balance and set stoploss."""
     deal_data = json.loads(json.dumps(robot.query_user_deals(market, 0, 1, 0), indent=4))
     position_type = deal_data['data']['records'][0]['side']
     stoploss_exist = int(json.loads(json.dumps(robot.query_stop_pending(market, 0, 0, 1)['data']['total'], indent=4)))
@@ -129,19 +129,18 @@ def market_sell(market: str):
         robot.close_market(market, position_id)
         time.sleep(2)
         
-        # Calculate order size (10% of available balance)
+        # Calculate order size (3% of available balance)
         available = float(json.loads(json.dumps(robot.query_account(), indent=4))['data']['USDT']['available'])
         index_price = float(json.loads(json.dumps(robot.get_market_state(market), indent=4))["data"]["ticker"]["index_price"])
-        
-        # Place sell order and stoploss
-        order_amount = truncate((available * 0.1) / index_price * leverage, truncate_digit)
+        order_amount = truncate((available * 0.03) / index_price * leverage, truncate_digit)
         stop_price = index_price * (1 + stoploss / 100)
-        
+      
+        # Place sell order and stoploss
         robot.put_market_order(market, robot.ORDER_DIRECTION_SELL, order_amount)
         robot.put_stop_market_order(market, 2, order_amount, stop_price, 3)
 
 def market_buy(market: str):
-    """Execute market buy order with 10% of account balance and set stoploss."""
+    """Execute market buy order with 3% of account balance and set stoploss."""
     deal_data = json.loads(json.dumps(robot.query_user_deals(market, 0, 1, 0), indent=4))
     position_type = deal_data['data']['records'][0]['side']
     stoploss_exist = int(json.loads(json.dumps(robot.query_stop_pending(market, 0, 0, 1)['data']['total'], indent=4)))
@@ -154,14 +153,13 @@ def market_buy(market: str):
         robot.close_market(market, position_id)
         time.sleep(2)
         
-        # Calculate order size (10% of available balance)
+        # Calculate order size (3% of available balance)
         available = float(json.loads(json.dumps(robot.query_account(), indent=4))['data']['USDT']['available'])
         index_price = float(json.loads(json.dumps(robot.get_market_state(market), indent=4))["data"]["ticker"]["index_price"])
-        
-        # Place buy order and stoploss
-        order_amount = truncate((available * 0.1) / index_price * leverage, truncate_digit)
+        order_amount = truncate((available * 0.03) / index_price * leverage, truncate_digit)
         stop_price = index_price * (1 - stoploss / 100)
-        
+
+        # Place buy order and stoploss
         robot.put_market_order(market, robot.ORDER_DIRECTION_BUY, order_amount)
         robot.put_stop_market_order(market, 1, order_amount, stop_price, 3)
 
