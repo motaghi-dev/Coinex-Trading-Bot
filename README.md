@@ -229,7 +229,7 @@ Planned enhancements:
 ###  Disclaimer
 
  
-> Trading cryptocurrencies involves a **very high level of risk**. This bot is designed for educational purposes. You are solely responsible for your financial decisions. Use this this content at your own discretion.
+> Trading cryptocurrencies involves a **very high level of risk**. This bot is designed for educational purposes. You are solely responsible for your financial decisions. Use this content at your own discretion.
 
 ---
 
